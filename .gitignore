@@ -1,0 +1,25 @@
+migrations/
+.vscode/
+dump.rdb
+**/__pycache__
+
+# local env files
+.env
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+package-lock.json
+yarn.lock
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
