@@ -44,7 +44,7 @@ def make_celery():
         env = config.settings.DevelopmentConfig
 
     celery = Celery(__name__, broker=env.CELERY_BROKER, backend=env.CELERY_RESULT_BACKEND)
-    celery.conf.update(CELERY_SEND_EVENTS=True)
+    MonitorThread(celery)
     return celery
 
 celery = make_celery()

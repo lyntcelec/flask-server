@@ -1,6 +1,7 @@
 # Flask server Boilerplate
 
 ## Features:
+
 - Environtment: production/development
 - Middleware JWT
 - Task-Celery
@@ -9,30 +10,47 @@
 - Migrations
 
 ## Install dependencies
+
 pip install -r requirements.txt
 
 ### Environtment example
+
 cp app/config/.env.example app/config/.env
 
 ## Production
+
 ### Run Celery
+
 FLASK_ENV=production celery -A app.tasks.celery worker --loglevel=INFO
+
 ### Run main app
+
 FLASK_ENV=production python main.py
 
 ## Development
+
 ### Run Celery
+
 FLASK_ENV=development celery -A app.tasks.celery worker --loglevel=INFO
+
 ### Run main app
+
 FLASK_ENV=development python main.py
 
+### Enable celery event
+
+celery -A app.tasks.celery control enable_events
+
 ## Migrations
+
 flask db init
 flask db migrate
 flask db upgrade
 
 ## API:
+
 ### Register
+
 ```
 POST http://0.0.0.0:3000/api/v1/register
 Body:
@@ -51,7 +69,9 @@ Response:
     "status": 0
 }
 ```
+
 ### Login
+
 ```
 POST http://0.0.0.0:3000/api/v1/login
 Body:
@@ -69,7 +89,9 @@ Response:
     "status": 0
 }
 ```
+
 ### Logout
+
 ```
 GET http://localhost:3000/api/v1/user/logout
 Header:
@@ -81,6 +103,8 @@ Response:
     "status": 0
 }
 ```
+
 ## Reference:
+
 https://www.digitalocean.com/community/tutorials/build-a-crud-web-app-with-python-and-flask-part-one
 https://github.com/cyberj0g/flask-deploy.git
