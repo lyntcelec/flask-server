@@ -49,8 +49,10 @@ def create_app():
         migrate.init_app(app, db)
         from app import model
         from app import api
+        from app.tasks import CeleryQueueMessages
 
         api.api_restful.init_app(app)
+        api.CeleryProcessing(CeleryQueueMessages)
 
         # define hello world page
         @app.route('/')

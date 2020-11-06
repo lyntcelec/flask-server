@@ -2,7 +2,7 @@ import asyncio
 from flask_restful import Api
 from app import config
 from .auth import Register, Login, Logout
-from .task import TaskStatusAPI, DataProcessingAPI
+from .task import TaskStatusAPI, DataProcessingAPI, CeleryProcessing
 
 api_restful = Api(prefix=config.settings.BaseConfig.API_PREFIX)
         
