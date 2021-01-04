@@ -44,7 +44,9 @@ celery -A app.tasks.celery control enable_events
 ## Migrations
 
 flask db init
+
 flask db migrate
+
 flask db upgrade
 
 ## API:
