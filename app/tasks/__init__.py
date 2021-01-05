@@ -5,6 +5,7 @@ from multiprocessing import Process, Queue
 
 CeleryQueueMessages = Queue()
 
+
 class MonitorThread(object):
     def __init__(self, celery_app, celery_queue, interval=2):
         self.celery_app = celery_app
@@ -39,19 +40,22 @@ class MonitorThread(object):
 
             time.sleep(self.interval)
 
-def make_celery():
-    if config.settings.BaseConfig.ENV == "production":
-        env = config.settings.ProductionConfig
-    else:
-        env = config.settings.DevelopmentConfig
 
-    celery = Celery(__name__, broker=env.CELERY_BROKER, backend=env.CELERY_RESULT_BACKEND)
+def make_celery():
+    env = config.settings.BaseConfig
+
+    celery = Celery(
+        __name__, broker=env.CELERY_BROKER, backend=env.CELERY_RESULT_BACKEND
+    )
+
     MonitorThread(celery, CeleryQueueMessages)
     return celery
 
+
 celery = make_celery()
+
 
 @celery.task()
 def process_data(i):
     time.sleep(5)
-    return i*2
+    return i * 2

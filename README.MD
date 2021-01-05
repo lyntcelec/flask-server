@@ -21,21 +21,21 @@ cp app/config/.env.example app/config/.env
 
 ### Run Celery
 
-FLASK_ENV=production celery -A app.tasks.celery worker --loglevel=INFO
+FLASK_ENV=.env.production celery -A app.tasks.celery worker --loglevel=INFO
 
 ### Run main app
 
-FLASK_ENV=production python main.py
+FLASK_ENV=.env.production python main.py
 
 ## Development
 
 ### Run Celery
 
-FLASK_ENV=development celery -A app.tasks.celery worker --loglevel=INFO
+FLASK_ENV=.env.development celery -A app.tasks.celery worker --loglevel=INFO
 
 ### Run main app
 
-FLASK_ENV=development python main.py
+FLASK_ENV=.env.development python main.py
 
 ### Enable celery event
 

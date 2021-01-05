@@ -3,9 +3,6 @@ migrations/
 dump.rdb
 **/__pycache__
 
-# local env files
-.env
-
 # Log files
 npm-debug.log*
 yarn-debug.log*
