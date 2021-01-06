@@ -9,17 +9,27 @@ from flask_migrate import Migrate
 from app import config
 from app.middleware import jwt, jwt_blacklist
 
-logging.basicConfig(
-    level=logging.DEBUG,
-    format="[%(asctime)s]: {} %(levelname)s %(message)s".format(os.getpid()),
-    datefmt="%Y-%m-%d %H:%M:%S",
-    handlers=[logging.StreamHandler()],
-)
+if config.settings.BaseConfig.ENV == ".env.production":
+    logging.basicConfig(
+        filename="{name}.log".format(name=config.settings.BaseConfig.SERVICE_NAME),
+        level=logging.DEBUG,
+        format="[%(asctime)s]: {} %(levelname)s %(message)s".format(os.getpid()),
+        datefmt="%Y-%m-%d %H:%M:%S",
+    )
+else:
+    logging.basicConfig(
+        level=logging.DEBUG,
+        format="[%(asctime)s]: {} %(levelname)s %(message)s".format(os.getpid()),
+        datefmt="%Y-%m-%d %H:%M:%S",
+        handlers=[logging.StreamHandler()],
+    )
 
 logger = logging.getLogger()
 login_manager = LoginManager()
 db = SQLAlchemy()
 migrate = Migrate()
+
+logging.debug("Environment: {}".format(config.settings.BaseConfig.ENV))
 
 
 def create_app():
