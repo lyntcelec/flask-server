@@ -44,18 +44,57 @@ def create_app():
         login_manager.login_message = "You must be logged in to access this page."
         login_manager.login_view = "auth.login"
 
+        # Workaround to use migration
+        app.config[
+            "SQLALCHEMY_DATABASE_URI"
+        ] = "mysql+pymysql://root:root@127.0.0.1/iflask"
+
         # initialize migrations
         migrate.init_app(app, db)
         from app import model
         from app import api
         from app.tasks import CeleryQueueMessages
+        from app.test import (
+            test_1_1,
+            test_1_2,
+            test_1_3,
+            test_2_1,
+            test_2_2,
+            test_2_3,
+            test_3_1,
+            test_3_2,
+            test_3_3,
+            test_4_1,
+            test_4_2,
+            test_5_1,
+            test_5_2,
+            test_5_3,
+        )
 
         api.api_restful.init_app(app)
         api.CeleryProcessing(CeleryQueueMessages)
 
         # define hello world page
         @app.route("/")
-        def hello_world():
-            return "Hello, World!"
+        def test():
+            test_1_1()
+            test_1_2()
+            test_1_3()
+
+            test_2_1()
+            test_2_2()
+            test_2_3()
+
+            test_3_1()
+            test_3_2()
+            test_3_3()
+
+            test_4_1()
+            test_4_2()
+
+            test_5_1()
+            test_5_2()
+            test_5_3()
+            return "Running test"
 
     return app
