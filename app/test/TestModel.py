@@ -144,8 +144,8 @@ def test_5_2():
 
 def test_5_3():
     myhouse = House.query.filter_by(id=1).first()
-    print("house", myhouse.__dict__)
+    print("myhouse", myhouse.__dict__)
     mypeople = People.query.filter_by(id=1).first()
-    print("house", mypeople.__dict__)
+    print("mypeople", mypeople.__dict__)
     myhouse.people.append(mypeople)
     db.session.commit()
