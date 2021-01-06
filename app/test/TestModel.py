@@ -115,7 +115,7 @@ def test_4_1():
 def test_4_2():
     pen = Pen(id=1, name="color", book_id=1)
     # Error: 1->1
-    # pen2 = Comment(id=2, name="pencil", book_id=1)
+    # pen2 = Pen(id=2, name="pencil", book_id=1)
     db.session.add(pen)
     # db.session.add(pen2)
     db.session.commit()
