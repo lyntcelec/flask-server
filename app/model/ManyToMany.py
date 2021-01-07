@@ -28,7 +28,6 @@ class Association(db.Model):
     house_id = db.Column(db.Integer, db.ForeignKey("house.id"), primary_key=True)
     people_id = db.Column(db.Integer, db.ForeignKey("people.id"), primary_key=True)
     extra_data = db.Column(db.String(50))
-
     people = db.relationship("People", backref="house_associations")
     house = db.relationship("House", backref="people_associations")
 
